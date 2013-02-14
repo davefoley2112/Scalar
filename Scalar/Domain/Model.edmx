@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="ModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Guitars" EntityType="Model.Guitar" />
+          <EntitySet Name="Necks" EntityType="Model.Neck" />
+          <AssociationSet Name="GuitarNeck" Association="Model.GuitarNeck">
+            <End Role="Guitar" EntitySet="Guitars" />
+            <End Role="Neck" EntitySet="Necks" />
+          </AssociationSet>
+          <EntitySet Name="Strings" EntityType="Model.String" />
+          <AssociationSet Name="NeckString" Association="Model.NeckString">
+            <End Role="Neck" EntitySet="Necks" />
+            <End Role="String" EntitySet="Strings" />
+          </AssociationSet>
+          <EntitySet Name="Frets" EntityType="Model.Fret" />
+          <AssociationSet Name="NeckFret" Association="Model.NeckFret">
+            <End Role="Neck" EntitySet="Necks" />
+            <End Role="Fret" EntitySet="Frets" />
+          </AssociationSet>
+          <EntitySet Name="Notes" EntityType="Model.Note" />
+          <EntitySet Name="Octaves" EntityType="Model.Octave" />
+          <EntitySet Name="Scales" EntityType="Model.Scale" />
+          <EntitySet Name="Chords" EntityType="Model.Chord" />
+          <EntitySet Name="Degrees" EntityType="Model.Degree" />
+          <EntitySet Name="Progressions" EntityType="Model.Progression" />
+          <EntitySet Name="Modes" EntityType="Model.Mode" />
+          <EntitySet Name="ParallelModes" EntityType="Model.ParallelMode" />
+          <EntitySet Name="DerivativeModes" EntityType="Model.DerivativeMode" />
+          <EntitySet Name="Intervals" EntityType="Model.Interval" />
+          <AssociationSet Name="ScaleInterval" Association="Model.ScaleInterval">
+            <End Role="Scale" EntitySet="Scales" />
+            <End Role="Interval" EntitySet="Intervals" />
+          </AssociationSet>
+          <AssociationSet Name="ChordInterval" Association="Model.ChordInterval">
+            <End Role="Chord" EntitySet="Chords" />
+            <End Role="Interval" EntitySet="Intervals" />
+          </AssociationSet>
+          <AssociationSet Name="ScaleMode" Association="Model.ScaleMode">
+            <End Role="Scale" EntitySet="Scales" />
+            <End Role="Mode" EntitySet="Modes" />
+          </AssociationSet>
+          <AssociationSet Name="ProgressionChord" Association="Model.ProgressionChord">
+            <End Role="Progression" EntitySet="Progressions" />
+            <End Role="Chord" EntitySet="Chords" />
+          </AssociationSet>
+          <EntitySet Name="Keys" EntityType="Model.Key" />
+          <AssociationSet Name="KeyScale" Association="Model.KeyScale">
+            <End Role="Key" EntitySet="Keys" />
+            <End Role="Scale" EntitySet="Scales" />
+          </AssociationSet>
+          <EntitySet Name="Tunings" EntityType="Model.Tuning" />
+          <AssociationSet Name="NeckTuning" Association="Model.NeckTuning">
+            <End Role="Neck" EntitySet="Necks" />
+            <End Role="Tuning" EntitySet="Tunings" />
+          </AssociationSet>
+          <AssociationSet Name="NoteString" Association="Model.NoteString">
+            <End Role="Note" EntitySet="Notes" />
+            <End Role="String" EntitySet="Strings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EnumType Name="Tonality">
+          <Member Name="Major" />
+          <Member Name="Minor" />
+          <Member Name="Dominant" />
+        </EnumType>
+        <EntityType Name="Guitar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Necks" Relationship="Model.GuitarNeck" FromRole="Guitar" ToRole="Neck" />
+        </EntityType>
+        <EntityType Name="Neck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Guitar" Relationship="Model.GuitarNeck" FromRole="Neck" ToRole="Guitar" />
+          <Property Type="Int32" Name="GuitarId" Nullable="false" />
+          <NavigationProperty Name="Strings" Relationship="Model.NeckString" FromRole="Neck" ToRole="String" />
+          <NavigationProperty Name="Frets" Relationship="Model.NeckFret" FromRole="Neck" ToRole="Fret" />
+          <NavigationProperty Name="Tuning" Relationship="Model.NeckTuning" FromRole="Neck" ToRole="Tuning" />
+        </EntityType>
+        <Association Name="GuitarNeck">
+          <End Type="Model.Guitar" Role="Guitar" Multiplicity="1" />
+          <End Type="Model.Neck" Role="Neck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guitar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Neck">
+              <PropertyRef Name="GuitarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="String">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Neck" Relationship="Model.NeckString" FromRole="String" ToRole="Neck" />
+          <Property Type="Int32" Name="NeckId" Nullable="false" />
+          <NavigationProperty Name="OpenNote" Relationship="Model.NoteString" FromRole="String" ToRole="Note" />
+          <Property Type="Int32" Name="NoteId" Nullable="false" />
+        </EntityType>
+        <Association Name="NeckString">
+          <End Type="Model.Neck" Role="Neck" Multiplicity="1" />
+          <End Type="Model.String" Role="String" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neck">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="String">
+              <PropertyRef Name="NeckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Fret">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Neck" Relationship="Model.NeckFret" FromRole="Fret" ToRole="Neck" />
+          <Property Type="Int32" Name="NeckId" Nullable="false" />
+        </EntityType>
+        <Association Name="NeckFret">
+          <End Type="Model.Neck" Role="Neck" Multiplicity="1" />
+          <End Type="Model.Fret" Role="Fret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neck">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fret">
+              <PropertyRef Name="NeckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Strings" Relationship="Model.NoteString" FromRole="Note" ToRole="String" />
+        </EntityType>
+        <EntityType Name="Octave">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Scale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Intervals" Relationship="Model.ScaleInterval" FromRole="Scale" ToRole="Interval" />
+          <NavigationProperty Name="Modes" Relationship="Model.ScaleMode" FromRole="Scale" ToRole="Mode" />
+          <NavigationProperty Name="Key" Relationship="Model.KeyScale" FromRole="Scale" ToRole="Key" />
+        </EntityType>
+        <EntityType Name="Chord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Intervals" Relationship="Model.ChordInterval" FromRole="Chord" ToRole="Interval" />
+          <NavigationProperty Name="Progression" Relationship="Model.ProgressionChord" FromRole="Chord" ToRole="Progression" />
+          <Property Type="Int32" Name="ProgressionId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Progression">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Chords" Relationship="Model.ProgressionChord" FromRole="Progression" ToRole="Chord" />
+        </EntityType>
+        <EntityType Name="Mode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Scale" Relationship="Model.ScaleMode" FromRole="Mode" ToRole="Scale" />
+          <Property Type="Int32" Name="ScaleId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParallelMode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DerivativeMode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Interval">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Scale" Relationship="Model.ScaleInterval" FromRole="Interval" ToRole="Scale" />
+          <Property Type="Int32" Name="ScaleId" Nullable="false" />
+          <NavigationProperty Name="Chord" Relationship="Model.ChordInterval" FromRole="Interval" ToRole="Chord" />
+          <Property Type="Int32" Name="ChordId" Nullable="false" />
+        </EntityType>
+        <Association Name="ScaleInterval">
+          <End Type="Model.Scale" Role="Scale" Multiplicity="1" />
+          <End Type="Model.Interval" Role="Interval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Interval">
+              <PropertyRef Name="ScaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ChordInterval">
+          <End Type="Model.Chord" Role="Chord" Multiplicity="1" />
+          <End Type="Model.Interval" Role="Interval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Interval">
+              <PropertyRef Name="ChordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ScaleMode">
+          <End Type="Model.Scale" Role="Scale" Multiplicity="1" />
+          <End Type="Model.Mode" Role="Mode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mode">
+              <PropertyRef Name="ScaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProgressionChord">
+          <End Type="Model.Progression" Role="Progression" Multiplicity="1" />
+          <End Type="Model.Chord" Role="Chord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Progression">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chord">
+              <PropertyRef Name="ProgressionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Key">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Scale" Relationship="Model.KeyScale" FromRole="Key" ToRole="Scale" />
+        </EntityType>
+        <Association Name="KeyScale">
+          <End Type="Model.Key" Role="Key" Multiplicity="1" />
+          <End Type="Model.Scale" Role="Scale" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Tuning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Neck" Relationship="Model.NeckTuning" FromRole="Tuning" ToRole="Neck" />
+        </EntityType>
+        <Association Name="NeckTuning">
+          <End Type="Model.Neck" Role="Neck" Multiplicity="1" />
+          <End Type="Model.Tuning" Role="Tuning" Multiplicity="1" />
+        </Association>
+        <Association Name="NoteString">
+          <End Type="Model.Note" Role="Note" Multiplicity="1" />
+          <End Type="Model.String" Role="String" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Note">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="String">
+              <PropertyRef Name="NoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model" />
+        <Alias Key="Target" Value="Model.Store" />
+        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

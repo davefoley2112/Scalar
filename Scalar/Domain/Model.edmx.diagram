@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e9470e99e7644de79c9e6bfa37669d13" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model.Guitar" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Neck" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="false" />
+        <AssociationConnector Association="Model.GuitarNeck" />
+        <EntityTypeShape EntityType="Model.String" Width="1.5" PointX="4.75" PointY="1.375" IsExpanded="false" />
+        <AssociationConnector Association="Model.NeckString" />
+        <EntityTypeShape EntityType="Model.Fret" Width="1.5" PointX="1.375" PointY="1.625" IsExpanded="false" />
+        <AssociationConnector Association="Model.NeckFret" />
+        <EntityTypeShape EntityType="Model.Note" Width="1.5" PointX="7.125" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Octave" Width="1.5" PointX="0.5" PointY="2.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Scale" Width="1.5" PointX="3.25" PointY="2.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Chord" Width="1.5" PointX="5.625" PointY="3.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Degree" Width="1.5" PointX="8.625" PointY="2.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Progression" Width="1.5" PointX="7.5" PointY="3" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Mode" Width="1.5" PointX="1.125" PointY="3.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.ParallelMode" Width="1.5" PointX="0.5" PointY="4.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.DerivativeMode" Width="1.5" PointX="2.5" PointY="4.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model.Interval" Width="1.5" PointX="3.25" PointY="3.75" IsExpanded="false" />
+        <AssociationConnector Association="Model.ScaleInterval" />
+        <AssociationConnector Association="Model.ChordInterval" />
+        <AssociationConnector Association="Model.ScaleMode" />
+        <AssociationConnector Association="Model.ProgressionChord" />
+        <EntityTypeShape EntityType="Model.Key" Width="1.5" PointX="5.375" PointY="2.25" IsExpanded="false" />
+        <AssociationConnector Association="Model.KeyScale" />
+        <EntityTypeShape EntityType="Model.Tuning" Width="1.5" PointX="5" PointY="0.5" IsExpanded="false" />
+        <AssociationConnector Association="Model.NeckTuning" />
+        <AssociationConnector Association="Model.NoteString" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
