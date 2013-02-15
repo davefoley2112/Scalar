@@ -25,21 +25,21 @@ namespace Domain
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Guitar> Guitars { get; set; }
-        public DbSet<Neck> Necks { get; set; }
-        public DbSet<String> Strings { get; set; }
-        public DbSet<Fret> Frets { get; set; }
-        public DbSet<Note> Notes { get; set; }
-        public DbSet<Octave> Octaves { get; set; }
-        public DbSet<Scale> Scales { get; set; }
-        public DbSet<Chord> Chords { get; set; }
-        public DbSet<Degree> Degrees { get; set; }
-        public DbSet<Progression> Progressions { get; set; }
-        public DbSet<Mode> Modes { get; set; }
-        public DbSet<ParallelMode> ParallelModes { get; set; }
-        public DbSet<DerivativeMode> DerivativeModes { get; set; }
-        public DbSet<Interval> Intervals { get; set; }
-        public DbSet<Key> Keys { get; set; }
-        public DbSet<Tuning> Tunings { get; set; }
+        public IDbSet<Guitar> Guitars { get; set; }
+        public IDbSet<Neck> Necks { get; set; }
+        public IDbSet<String> Strings { get; set; }
+        public IDbSet<Fret> Frets { get; set; }
+        public IDbSet<Note> Notes { get; set; }
+        public IDbSet<Octave> Octaves { get; set; }
+        public IDbSet<Scale> Scales { get; set; }
+        public IDbSet<Chord> Chords { get; set; }
+        public IDbSet<Degree> Degrees { get; set; }
+        public IDbSet<Progression> Progressions { get; set; }
+        public IDbSet<Mode> Modes { get; set; }
+        public IDbSet<ParallelMode> ParallelModes { get; set; }
+        public IDbSet<DerivativeMode> DerivativeModes { get; set; }
+        public IDbSet<Interval> Intervals { get; set; }
+        public IDbSet<Key> Keys { get; set; }
+        public IDbSet<Tuning> Tunings { get; set; }
     }
 }

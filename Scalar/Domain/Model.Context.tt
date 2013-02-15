@@ -78,7 +78,7 @@ if (!loader.IsLazyLoadingEnabled(container))
     foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
     {
 #>
-    <#=codeStringGenerator.DbSet(entitySet)#>
+    <#=codeStringGenerator.IDbSet(entitySet)#>
 <#
     }
 
@@ -293,11 +293,11 @@ public class CodeStringGenerator
             callParams);
     }
     
-    public string DbSet(EntitySet entitySet)
+    public string IDbSet(EntitySet entitySet)
     {
         return string.Format(
             CultureInfo.InvariantCulture,
-            "{0} DbSet<{1}> {2} {{ get; set; }}",
+            "{0} IDbSet<{1}> {2} {{ get; set; }}",
             Accessibility.ForReadOnlyProperty(entitySet),
             _typeMapper.GetTypeName(entitySet.ElementType),
             _code.Escape(entitySet));
