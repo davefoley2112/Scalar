@@ -17,7 +17,7 @@ namespace Internet.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Canvas and SVG comparisons.";
 
             return View();
         }
@@ -25,6 +25,27 @@ namespace Internet.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult DeepDive()
+        {
+            ViewBag.Message = "Initial Deep Dive.";
+
+            return View();
+        }
+
+        public ActionResult BasicVectorShapes()
+        {
+            ViewBag.Message = "Basic Vector Shapes.";
+
+            return View();
+        }
+
+        public ActionResult Paths()
+        {
+            ViewBag.Message = "Paths.";
 
             return View();
         }

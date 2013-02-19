@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "Fretboard Visualization";
 }
 
 <hgroup class="title">
@@ -8,27 +8,37 @@
 </hgroup>
 
 <article>
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
-    </p>
-
-    <p>
-        Use this area to provide additional information.
+    <p>This is a comparison of two alternate approaches to providing visualizations on the browser. We think
+        it's a load of old bollocks, actually. Bring back Silverlight!
     </p>
 </article>
 
 <aside>
-    <h3>Aside Title</h3>
-    <p>
-        Use this area to provide additional information.
-    </p>
-    <ul>
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-    </ul>
+    <h3>SVG</h3>
+    <p>Here is our attempt via SVG.</p>
 </aside>
+
+<!-- SVG Section -->
+
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="250">
+    <rect x="0" y="0" width="100%" height="100%" fill="none" stroke="black"/>
+    <text x="25" y="50" font-size="24">SVG Circle Element</text>
+    <text x="25" y="275">Click the circle to change its size.</text>
+    <circle cx="125" cy="150" r="50" 
+        fill="pink" stroke="green" stroke-width="5"
+        onclick="doCircle(evt)" />
+</svg>
+
+<!-- Canvas Section -->
+<aside>
+    <h3>Canvas</h3>
+    <p>Here is our attempt via the HTML5 canvas element.</p>
+</aside>
+
+<style type="text/css">
+    canvas { border: 1px solid black; }
+</style>
+    
+<canvas id="canvasFretboard" width="750" height="250">
+  Your shit browser doesn't support the Canvas element. Please upgrade.
+</canvas>

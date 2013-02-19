@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Chapter 2";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<aside>
+    <h3>SVG</h3>
+    <p>Basic Vector Shapes</p>
+</aside>
+
+<h3>Line</h3>
+<svg xmlns="http://www.w3.org/2000/svg" height="250">
+    <line x2="300" y2="100" 
+        stroke="green" stroke-width="10" stroke-linecap="round" />
+</svg>
+
+<h3>Rectangle</h3>
+<svg xmlns="http://www.w3.org/2000/svg" height="250">
+    <rect width="300" height="170"
+        x="50" y="50" 
+        rx="90" ry="50"
+        stroke="darkseagreen" stroke-width="10" 
+        fill="lightgray" fill-opacity="0.6" />
+</svg>
+
+<h3>Circle</h3>
+<svg xmlns="http://www.w3.org/2000/svg" height="300">
+    <circle cx="150" cy="150" r="100"
+        stroke="darkseagreen" stroke-width="10" fill="grey" fill-opacity="0.6"/>
+</svg>
+
+<h3>Ellipse</h3>
+<svg xmlns="http://www.w3.org/2000/svg" height="300">
+    <ellipse cx="110" cy="55" rx="70" ry="35"
+             stroke="darkseagreen" stroke-width="0.8"
+      fill="lightgray" fill-opacity="0.6" />
+</svg>
+
+<h3>Polyline</h3>
+<svg xmlns="http://www.w3.org/2000/svg" height="300">
+    <polyline points="200,60 240,230 310,230 350,60"
+          fill="lightcyan" fill-opacity="0.7"  stroke="darkviolet"
+          stroke-width="25" stroke-linecap="round" stroke-opacity="0.2" />
+</svg>
+
+<h3>Polygon</h3>
+<svg xmlns="http://www.w3.org/2000/svg" height="300">
+    <polygon 
+        points="100, 10 115, 120 150, 150 115, 180 100, 250 85, 180 50, 150 85, 120"
+        fill="blue" fill-opacity="0.5" 
+        stroke="red" stroke-width="20" stroke-opacity="0.7" stroke-linejoin="miter"/>
+</svg>

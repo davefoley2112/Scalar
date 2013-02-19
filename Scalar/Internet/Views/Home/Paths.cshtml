@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Chapter 2";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<aside>
+    <h3>SVG</h3>
+    <p>Paths</p>
+</aside>
+
+<article>
+    <p>The path element is the most flexible drawing primitive in SVG. It contains subcommands that allow it to mimic all of the other basic shapes. As such, it is a bit trickier to learn.</p>
+    <p>Like other drawing primitives such as rect and ellipse, path can take attributes such as fill, stroke, and dash array. On the other hand, path uses a special syntax to describe the way it actually visits points on a plane. It borrows some of its origin (at least ideologically) from turtle graphics (http://en.wikipedia.org/wiki/Turtle_graphics), which are used in the Logo programming language to help introduce younger children to the basics of computer programming.</p>
+    <p>The SVG path element is very expressive due to the range of powerful path commands that it uses. As with the HTML5 canvas element, paths can be used to draw pen-up and pen-down movements, quadratic and cubic Bézier curves, and elliptical arcs, all within a single path. That is, you move the pen (or drawing point) from position to position, raise it and lower it, and make strokes of varying types. These instructions within the path syntax are called subcommands of the path object. In SVG, you’ll find them in the data attribute (d) of the path.</p>
+    <p>Paths typically begin with the M subcommand, which instructs the drawing to begin at a specific (x,y) point, such as (100,100), like so: d = "M 100,100 ..."</p>
+    <p>From there, you continue adding points—that is, (x,y) pairs—describing segments to be joined along the path.</p>
+</article>
+
+<h3>Subcommands: M and L</h3>
+<p>Start by specifying where the drawing will begin. As the first command for the d attribute, you insert a notation such as M x y, where x and y are numbers. You can think of M x y as meaning “Move the pen to the coordinates (x,y).” From there, you have the option of drawing a line (L), a quadratic curve (Q), a cubic curve (C), or an arc (A). For example, d=“M 50 50 L 150 150” would draw a diagonal line from the point (50,50) to the point (150,150).</p>
+<p>You should note several things about this example:
+    <ul>
+        <li>The second path does not specify a stroke; by default, the figure is filled with black. If you specify fill=“none”, the figure will be invisible unless you specify a stroke.</li>
+        <li>You can, for the sake of legibility, use commas between pairs of coordinates, in which case the space after the comma is optional.</li>
+        <li>You can omit the command letter on subsequent commands if the same command is used multiple times in a row, as shown in the second path, where the L command is followed by two pairs of values. Note also that if a MoveTo command (M or m) is directly followed by multiple pairs of coordinates, the subsequent pairs are treated as implicit LineTo commands.</li>
+    </ul>
+</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="250">
+    <path d="M 50 50 L 150 150" stroke="black"/>
+
+    <path d="M 150 50 L 250 150 350 100"/>
+</svg>
+
+<h3>Fill Properties: nonzero and evenodd</h3>
+<p>Since a path is filled with black by default, it is natural to wonder what happens when a path crosses itself. As mentioned in Table 2-1, the default fill-rule value is nonzero, which means that by default, the union of the regions traversed by the path is filled unless you specify otherwise. You can find more information on this in the “Fill Properties” section of the SVG specification, at http://www.w3.org/TR/SVG/painting.html#FillProperties.</p>
+<p>Here is an example to show the difference between the fill-rule values nonzero and evenodd.</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="500">
+    <path d="M 70,290 L 150,150 200,250 40,250 100,150 170,290"/>
+
+    <path d="M 70,290 L 150,150 200,250 40,250 100,150 170,290"
+        fill-rule="evenodd" transform="translate(250,0)"/>
+</svg>
+
+<h3>Building Complex Shapes With Separate Paths For Each Shape</h3>
+<p>This section shows how you can use the pen-down command M to make more complex shapes with path. It creates two paths, with one apparently drawn inside the other (in the sense that the coordinates of one are contained inside the polygon defined by the other).</p>
+<p>The figure contains two paths: one with three points, the other with four. Note how the triangle encompasses the rectangle.</p>
+<p>We we add the simple z subcommand (shown below in bold) at the end of each of the strings, which closes the path by drawing a final line back to the path’s starting point. After we do that, the paths will be closed rather than left open between endpoints.</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="500">
+    <path d="M 100,350 300,100 500,350 z" fill="none" stroke="black" stroke-width="20"/>
+    <path d="M 250,320 250,220 350,220 350,320 z" fill="none" stroke="black" stroke-width="20"/>
+</svg>
+
+
+<h3>Building Complex Shapes With A Single Path For All Shapes</h3>
+<p>This method can save a bit on markup, but is a little harder. However, there are some additional benefits to this approach that are worth considering. By combining the two shapes above into one compound path, you can define the fill rule of that path as evenodd. The net effect of this is that the shape’s fill color will not be applied to the interior region (although it would be applied to regions inside the interior region).</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="500">
+    <path d="M 100,350 300,100 500,350 z
+        M 250,320 250,220 350,220 350,320 z"
+        fill="none" stroke="black" stroke-width="20"/>
+</svg>
+
+<h3>Building Complex Shapes With A Single Path For All Shapes - Advantages</h3>
+<p> The rectangles that underlie the triangle are visible through the rectangular hole in the shape. This effect would be difficult to produce if the two parts of this compound path were separate paths, because to be visible, the rectangle would have to be on top of the triangle—but in that case, nothing inside it other than the triangle itself would be visible.</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="500">
+    <rect x="200" y="50" height="225" width="100" fill="red" stroke="black" stroke-width="10" />
+    <rect x="300" y="50" height="225" width="100" fill="green" stroke="black" stroke-width="10" />
+    <path d="M 100,350 300,100 500,350 z
+        M 250,320 250,220 350,220 350,320 z"
+        fill="yellow" stroke="black" stroke-width="15" fill-rule="evenodd"/>
+</svg>
+
+<h3>Quadratic Bezier Curves - The Q Subcommand</h3>
+<p> Here’s basically how a quadratic Bézier curve works in SVG. You define an initial point (e.g., 100,200) using a pen-down command. From there, you set a course heading toward the next point; however, instead of actually moving to the next point, you just aim in that direction. So, for example, while “M 100 200 L 200 400” will make you actually arrive at the point (200,400), “M 100 200 Q 200 400…” will merely point you in that direction. Ultimately, you also need a final destination, which is the final coordinate pair required for a quadratic Bézier curve. In the example that follows, the command “M 100,200 L 200,400 300,200” draws a red path between (and reaching each of) the three points indicated. But simply replacing the L with a Q (i.e., “M 100,200 Q 200,400 300,200”) produces a curve that passes through both endpoints and is a tangent to the associated lines of the allied line path at the endpoints of the segments.</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="300">
+    <path d="M 100 50 L 200,250 300,50" fill="none" stroke="red" stroke-width="5"/>
+    <path d="M 100 50 Q 200,250 300,50" fill="none" stroke="blue"  stroke-width="5"/>
+</svg>
+
+<p>Revisiting the earlier example, which modified the fill rule to produce an empty space in the middle of the curve, you can draw the same curve with quadratic splines instead of lines to see the effect.</p>
+<p>Here’s an example of a graphic that uses a quadratic spline:</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="200">
+    <path fill-rule="evenodd" d="M 70 140 L 150,0 200,100 L 40,100 100,0 L 170,140 70 140"/>
+    <path fill="red" fill-rule="evenodd" d="M 70 140 Q 150,0 200,100 Q 40,100 100,0 Q 170,140 70 140"/>
+</svg>
+
+<h3>Cubic Bezier Curves - The C Subcommand</h3>
+<svg xmlns="http://www.w3.org/2000/svg" height="250">
+    <path fill-rule="evenodd" d="M 70 140 L 150,0 200,100 L 40,100 100,0 L 170,140 70 140"/>
+    <path fill="#c53" fill-rule="evenodd" opacity=".5"
+        d="M 70 140 C 17.5 ,140 150,0 200,100 C 220, 140 40,100 100,0 C 127,-47 170,140 70 140" />
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="250">
+    <path fill="red" fill-rule="evenodd" d="M 0,200 C 50,200 100,100 150,200 C200,300 250,200 300,200"/>
+    <path fill="blue" fill-rule="evenodd" d="M 0,200 C 50,200 100,300 150,200 C200,100 250,200 300,200"/>
+</svg>
+
+<h3>TODO: Smooth Curves - The S and T Subcommands</h3>
+
+<h3>Elliptical Arc - The A Subcommand</h3>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 400 300">
+    <path stroke="darkslategray" stroke-width="6" fill="none" stroke-linecap="round"
+        d="M50,100
+        A100,50 0 0 1 250,100
+        A80,40 0 0 1 90,100
+        A60,30 0 0 1 210,100
+        A40,20 0 0 1 130,100
+        A20,10 0 0 1 170,100" />
+</svg>
