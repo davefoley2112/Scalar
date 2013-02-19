@@ -49,5 +49,12 @@ namespace Internet.Controllers
 
             return View();
         }
+
+        public ActionResult ReuseAndPatterns()
+        {
+            ViewBag.Message = "Reusing Graphics and Creating Patterns.";
+
+            return View();
+        }
     }
 }

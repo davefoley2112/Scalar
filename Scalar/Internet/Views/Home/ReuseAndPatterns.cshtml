@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Chapter 2";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<aside>
+    <h3>SVG</h3>
+    <p>Reuse and Patterns</p>
+</aside>
+
+<h3>The Image Element</h3>
+<p>The SVG language provides the image element, which can reference other SVG images, as well as PNG and JPEG bitmap images. The syntax for the image element is similar to the rect element in that it has x, y, width, and height attributes.</p>
+<p>Referencing other SVG images is just as easy and becomes very useful in many application scenarios, such as reusing the same vector symbol on a page or dynamically loading vector images on demand.</p>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200">
+    <image xlink:href="../Images/bullet.png" x="340" y="0" width="140" height="160" opacity="0.5" />
+</svg>
+
+<h3>The Group Element</h3>
+<p>The SVG group element, g, is great for logically grouping sets of related graphical objects. This group capability makes it easy to add styles, transformations, interactivity, and even animations to entire groups of objects. The following code groups a circle and a bitmap image together into a group named iris, which is then grouped together with an ellipse shape into another group named eye.</p>
+<p>With some creativity, you could then add some scripted interactivity such that the iris group could follow the mouse, while the eye group could blink randomly or at set intervals.</p>
+<p>You’ll see another great use for g during the discussion of transformations and interactivity in SVG in Chapter 4. You can associate items together in a group and then define transformations to move, scale, or rotate all the items together so that their spatial relations to one another are maintained. Through the use of interactivity in SVG, you can assign, for example, an onclick event to an entire group so that all elements within the group respond to the event.</p>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300">
+    <!-- Group containing the eye. -->
+    <g id="eye">
+        <!-- Draw the ellipse. -->
+        <ellipse fill="#a1d9ad" fill-opacity="0.7" fill-rule="nonzero" stroke="#32287d" stroke-width="1" stroke-opacity="0.5" />
+
+        <!-- Group containing the eye's iris. -->
+        <g id="iris" cx="50" cy="50" rx="20" ry="14">
+
+            <!-- Draw the circle. -->
+            <circle id="path3395" cx="50" cy="50" r="10"
+                fill="black" fill-opacity="1" fill-rule="nonzero"
+                stroke="#32287d" stroke-width="1" stroke-linecap="butt" stroke-linejoin="bevel" stroke-miterlimit="4" />
+
+            <!-- Reference the bitmap image (PNG) -->
+            <image id="bitmapCentralBall" width="5.5%" height="5.5%" x="39px" y="42px"
+                xlink:href="../Images/svgbook/iris-small.png"
+                alt="NASA Photo of Jupiter" />
+        </g>
+    </g>
+</svg>
+
+<h3>The Use Element</h3>
+<p>The use element lets you reuse existing elements and thus write less code. Like the image element, use takes x, y, height, and width attributes, and it references other content using the xlink:href attribute.</p>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300">
+    
+    <!-- Draw the upper-right rectangle. -->
+    <rect fill="#ada1d9" fill-opacity="1" fill-rule="nonzero"
+        stroke="#32287d" stroke-width="10" stroke-linecap="butt" stroke-linejoin="bevel" stroke-miterlimit="4" stroke-opacity="0.4"
+        id="rectangleA" width="20" height="20" x="50" y="50" />
+
+    <!-- Reuse the first rectangle element and move it to a different position. -->
+    <use x="" y="150" xlink:href="#rectangleA" />
+</svg>
+
+<h3>Patterns</h3>
+<p>The SVG language helps you create and reuse patterns with ease. Patterns are extremely useful—in fact, the grid background found in many of this book’s examples is just a simple pattern that consists of a single 10-by-10-pixel rectangle. The defs element can be used to store content that will not be directly displayed. This stored hidden content can then be referenced and displayed by other SVG elements, which makes it ideal for things such as patterns that contain reusable graphics.</p>
+<p>To create a basic pattern in SVG, first place a rectangle within a pattern element, and then put everything inside of a defs element.</p>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400">
+    <defs>
+        <pattern id="Pattern01" width="10" height="10" patternUnits="userSpaceOnUse">
+            <rect width="10" height="10" fill="#FFFFFF" stroke="#000000" stroke-width="0.1"/>
+        </pattern>
+    </defs>
+
+    <rect id="Background" x="0" y="0" width="100%" height="100%" fill="url(#Pattern01)" stroke-width="0.5" stroke="#000000" />
+</svg>
