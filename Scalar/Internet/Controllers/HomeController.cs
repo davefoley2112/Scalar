@@ -56,5 +56,12 @@ namespace Internet.Controllers
 
             return View();
         }
+
+        public ActionResult CaseStudy()
+        {
+            ViewBag.Message = "Case Study - Designing a Reusable Pattern.";
+
+            return View();
+        }
     }
 }

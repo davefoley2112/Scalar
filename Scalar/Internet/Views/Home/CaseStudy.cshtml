@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Chapter 2";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<aside>
+    <h3>SVG</h3>
+    <p>Case Study</p>
+</aside>
+
+<h3>The TODO Element</h3>
+<p>The SVG language provides TODO.</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    version="1.1"
+    width="800" height="600" viewBox="0 0 400 300" preserveAspectRatio="none">
+
+    <g id="layer1"></g>
+
+    <line id="patternLine1" x1="90" y1="10" x2="10" y2="90" 
+        stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" 
+        stroke-miterlimit="4" stroke-opacity="0.4" stroke-dasharray="1, 6" stroke-dashoffset="0" />
+
+    <use xlink:href="#patternLine1" id="patternLine2"
+        stroke-opacity="1"
+        transform="rotate(90, 50, 50)" />
+</svg>

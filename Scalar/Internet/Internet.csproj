@@ -321,6 +321,7 @@
     <Content Include="Views\Home\DeepDive.cshtml" />
     <Content Include="Views\Home\Paths.cshtml" />
     <Content Include="Views\Home\ReuseAndPatterns.cshtml" />
+    <Content Include="Views\Home\CaseStudy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
