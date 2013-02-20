@@ -29,13 +29,16 @@ namespace Internet.Controllers
             return View();
         }
 
+        #region Chapter 1
         public ActionResult DeepDive()
         {
             ViewBag.Message = "Initial Deep Dive.";
 
             return View();
         }
+        #endregion
 
+        #region Chapter 2
         public ActionResult BasicVectorShapes()
         {
             ViewBag.Message = "Basic Vector Shapes.";
@@ -63,5 +66,15 @@ namespace Internet.Controllers
 
             return View();
         }
+        #endregion
+
+        #region Chapter 3
+        public ActionResult Text()
+        {
+            ViewBag.Message = "Text.";
+
+            return View();
+        }
+        #endregion
     }
 }

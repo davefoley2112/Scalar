@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Chapter 3";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<aside>
+    <h3>SVG</h3>
+    <p>Case Study</p>
+</aside>
+
+<h3>The Text Element</h3>
+<p>Some of the most useful attributes of the text element are x (for setting the horizontal position), y (for the vertical position of the baseline of the text), fill (for determining the text’s color or pattern), font-size, and font-family, though there are literally dozens of other text attributes that you can experiment with. As a general rule, the use of attributes gives you precise control over layout and rendering. Size and positioning values can be expressed with unit identifiers, which are the same as in CSS: em, ex, px, pt, pc, cm, mm, and in. If you don’t specify a font family in the outermost svg element (or through a style sheet) for the whole document, remember to always specify it for a particular text element or for its container element; otherwise, the browser will use the font family that has been set as the default in the browser’s options.</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="300">
+    <text x="20px" y="55px" font-family="Verdana" font-size="43pt">Hello World!</text>
+</svg>
+
+<h3>Text and Shapes on a Path - textPath and mpath</h3>
+<p>One of the most interesting and useful features of SVG is the capability of using paths for positioning shapes and text. As an example, all five of the primary browsers now support text effects such as the one shown in the following figure. This example demonstrates how to place text along a Bézier curve.</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="300">
+    <defs>
+        <path id="curve" d="M 10 100 C 200 30 300 250 350 50" />
+    </defs>
+
+    <text font-family="arial" font-size="16" fill="black">
+        <textPath xlink:href="#curve">Hello, here is some text lying along a Bézier curve.</textPath>
+    </text>
+</svg>
+
+<h3>The tref Element</h3>
+<h4>TODO: THIS DOESNT WORK - WHY?</h4>
+<p>Another useful element is tref, which allows you to reuse letters and entire paragraphs of text. You can specify the referencing to the character data of another text element with a tref element like this:</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="300">
+    <defs>
+        <text id="ReferencedText">Reusable character data</text>
+    </defs>
+
+    <text font-family="arial" font-size="16" fill="black">
+        <tref xlink:href="#ReferencedText" />
+    </text>
+</svg>
+
+<p></p>
+<h4>TODO: THIS GRADIENT STUFF KINDA WORKS - BUT ITS WAY TOO SMALL - WHY?</h4>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300">
+    <linearGradient id="g">
+        <stop offset="0" stop-color="#870" />
+        <stop offset=".2" stop-color="#520" />
+        <stop offset=".4" stop-color="#000" />
+        <stop offset=".6" stop-color="#840" />
+        <stop offset=".8" stop-color="#210" />
+        <stop offset="1" stop-color="#832" />
+    </linearGradient>
+
+    <text id="T"
+        fill="none"
+        stroke-width="4" stroke="url(#g)" stroke-opacity="1"
+        font-family="serif" font-stretch="ultra-expanded" stroke-dasharray="10 5"
+        rotate="-25 -20 -15 -10 -5 0 5 10 15 20"
+        textLength="90" lengthAdjust="spacingAndGlyphs" font-style="oblique"
+        text-decoration="overline" font-size="50" x="5" y="65%" font-weight="bold">Decorative</text>
+</svg>

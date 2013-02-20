@@ -322,6 +322,7 @@
     <Content Include="Views\Home\Paths.cshtml" />
     <Content Include="Views\Home\ReuseAndPatterns.cshtml" />
     <Content Include="Views\Home\CaseStudy.cshtml" />
+    <Content Include="Views\Home\Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
