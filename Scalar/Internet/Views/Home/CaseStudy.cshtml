@@ -14,17 +14,94 @@
 
 <h3>The TODO Element</h3>
 <p>The SVG language provides TODO.</p>
+
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-    version="1.1"
-    width="800" height="600" viewBox="0 0 400 300" preserveAspectRatio="none">
+    id="chapter2-ShapesPatternsGroupsUse" version="1.1"
+    width="800" height="600"
+    viewBox="0 0 400 300" preserveAspectRatio="none">
 
-    <g id="layer1"></g>
+    <defs>
+        <pattern id="gridPatternWithTessellation" 
+            x="20" y="20" width="100" height="100"
+            patternUnits="userSpaceOnUse">
 
-    <line id="patternLine1" x1="90" y1="10" x2="10" y2="90" 
-        stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" 
-        stroke-miterlimit="4" stroke-opacity="0.4" stroke-dasharray="1, 6" stroke-dashoffset="0" />
+            <!-- Draw the lines. -->
+            <line id="patternLine1"
+                x1="90" y1="10" x2="10" y2="90"
+                stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+                stroke-miterlimit="4" stroke-opacity="0.4" stroke-dasharray="1, 6" stroke-dashoffset="0" />
 
-    <use xlink:href="#patternLine1" id="patternLine2"
-        stroke-opacity="1"
-        transform="rotate(90, 50, 50)" />
+            <!-- Reuse the first line, rotate it 90 degrees, and update the style attributes.-->
+            <use xlink:href="#patternLine1" id="patternLine2" 
+                transform="rotate(90, 50, 50)"
+                stroke-opacity="1" />
+
+            <!-- Draw the upper-right rectangle. -->
+            <rect id="patternRect-upperRight"
+                width="20" height="20" x="90" y="-10"
+                fill="#ada1d9" fill-opacity="1" fill-rule="nonzero" 
+                stroke="#32287d" stroke-width="10" stroke-linecap="butt" 
+                stroke-linejoin="bevel" stroke-miterlimit="4" stroke-opacity="0.4" />
+
+            <!-- Reuse the first rectangle element and rotate it 90 degrees each time. -->
+            <use xlink:href="#patternRect-upperRight" 
+                id="patternRect-lowerRight"
+                transform="rotate(90, 50, 50)" />
+            <use xlink:href="#patternRect-upperRight" 
+                id="patternRect-lowerLeft" 
+                transform="rotate(180, 50, 50)" />
+            <use xlink:href="#patternRect-upperRight"
+                id="patternRect-upperLeft" 
+                transform="rotate(270, 50, 50)" />
+
+            <!-- Group containing the eye. -->
+            <g id="eye">
+                <ellipse id="path3389"  cx="50" cy="50" rx="22" ry="14" 
+                    fill="#a1d9ad" fill-opacity="0.7" fill-rule="nonzero"
+                    stroke="#32287d" stroke-width="1" stroke-opacity="0.5" />
+                <g id="iris">
+                    <circle id="path3395" cx="50" cy="50" r="10" 
+                        fill="black" fill-opacity="1" fill-rule="nonzero" stroke="#32287d"
+                        stroke-width="1" stroke-linecap="butt" stroke-linejoin="bevel" stroke-miterlimit="4" />
+                    <image id="bitmapCentralBall"
+                        width="5.5%" height="5.5%" x="39px" y="42px"
+                        xlink:href="../Images/svgbook/iris-small.png"
+                        alt="NASA Photo of Jupiter" />
+                </g>
+            </g>
+
+            <path id="patternPath-lowerLeft"
+                d="M 0,50 s 10,0 0,20 C 20,20 0,0 0,0"
+                fill="none" 
+                stroke="black" stroke-width="1px" 
+                stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" />
+
+            <use xlink:href="#patternPath-lowerLeft"
+                id="patternPath-upperLeft" 
+                transform="rotate(90, 50, 50)" />
+            <use xlink:href="#patternPath-lowerLeft"
+                id="patternPath-upperRight"
+                transform="rotate(180, 50, 50)" />
+            <use xlink:href="#patternPath-lowerLeft"
+                id="patternPath-lowerRight"
+                transform="rotate(270, 50, 50)" />
+        </pattern>
+
+        <pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M10 0 L0 0 L0 10" fill='none' stroke='gray' stroke-width='0.25'/>
+        </pattern>
+  </defs>
+
+  <g id="layer1">
+      <!-- background grid -->
+      <rect id="grid" width="100%" height="100%" x="0" y="0" 
+          stroke='gray' stroke-width='0.25' 
+          fill='url(#gridPattern)'/>
+
+      <text x="3" y="9" font-size='8'>(0,0)</text>
+  </g>
+
+  <rect id="gridWithTessellation"
+          x="20" y="20" width="300" height="300"
+          fill='url(#gridPatternWithTessellation)' />
 </svg>
