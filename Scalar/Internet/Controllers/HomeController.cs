@@ -75,6 +75,37 @@ namespace Internet.Controllers
 
             return View();
         }
+
+        public ActionResult Gradients()
+        {
+            ViewBag.Message = "Gradients.";
+
+            return View();
+        }
+
+        public ActionResult Transforms()
+        {
+            ViewBag.Message = "Transforms.";
+
+            return View();
+        }
+        #endregion
+
+
+        #region Chapter 4
+        public ActionResult Declarative()
+        {
+            ViewBag.Message = "Declarative Animation.";
+
+            return View();
+        }
+
+        public ActionResult Scripting()
+        {
+            ViewBag.Message = "Scripting Interactivity.";
+
+            return View();
+        }
         #endregion
     }
 }

@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Chapter 3";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<aside>
+    <h3>SVG</h3>
+    <p>Transforms</p>
+</aside>
+
+<h3>TODO.</h3>
+<p>Todo.</p>
+<p>Todo.</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="300">
+    <line id="water" x1="-50" y1="110" x2="100%" y2="110"
+        stroke="blue" stroke-width="1" stroke-opacity="0.7" />
+
+    <g id="scene">
+        <circle id="sun" r="50" cx="30" cy="30"
+            fill="orange" stroke="grey" stroke-width="1" />
+        <circle id="venusInTransit" r="5" cx="15" cy="20"
+            fill="black" stroke="grey" stroke-width="1" />
+    </g>
+
+    <use xlink:href="#scene" mask="url(#hazeIca)" 
+        transform="scale(1 -1) translate(30 -210) skewX(-20) skewY(5)"/>
+</svg>
+
+<h3>TODO.</h3>
+<p>Todo.</p>
+<p>Todo.</p>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink=http://www.w3.org/1999/xlink 
+    height="170" width="450">
+    <style type="text/css">
+        svg { font: 12px sans-serif; shape-rendering: crispEdges; }
+        text { fill: white; text-anchor: end; font-weight: bold; }
+        g.bar rect { fill: green; }
+        g > #LookAtMe { fill: steelblue; }
+        rect#LookAtMe { fill: steelblue; }
+        rect.custom { fill: orange; }
+    </style>
+
+    <g transform="translate(0, 4.5)" class="bar">
+        <rect height="18" width="145.8" fill="papayawhip"></rect>
+        <text text-anchor="end" fill="white" dy=".35em" dx="-6" y="9" x="145.8">39</text>
+        <text text-anchor="end" dy=".35em" dx="-6" y="9" x="0">A</text>
+    </g>
+
+    <g transform="translate(0, 27)" class="bar">
+        <rect height="18" width="31.5" style="fill:blue"/>
+        <text text-anchor="end" fill="white" dy=".35em" dx="-6" y="9" x="31.5">12</text>
+        <text text-anchor="end" dy=".35em" dx="-6" y="9" x="0">B</text>
+    </g>
+
+    <g transform="translate(0, 49.6)" class="bar">
+        <rect id="LookAtMe" height="18" width="91.3" fill="steelblue"/>
+        <text text-anchor="end" fill="white" dy=".35em" dx="-6" y="9" x="91.3">26</text>
+        <text text-anchor="end" dy=".35em" dx="-6" y="9" x="0">C</text>
+    </g>
+
+    <g transform="translate(0, 72)" class="bar">
+        <rect class="custom" height="18" width="211.4" fill="steelblue"/>
+        <text text-anchor="end" fill="white" dy=".35em" dx="-6" y="9" x="211.4">54</text>
+        <text text-anchor="end" dy=".35em" dx="-6" y="9" x="0">D</text>
+    </g>
+</svg>

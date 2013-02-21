@@ -323,6 +323,10 @@
     <Content Include="Views\Home\ReuseAndPatterns.cshtml" />
     <Content Include="Views\Home\CaseStudy.cshtml" />
     <Content Include="Views\Home\Text.cshtml" />
+    <Content Include="Views\Home\Gradients.cshtml" />
+    <Content Include="Views\Home\Transforms.cshtml" />
+    <Content Include="Views\Home\Declarative.cshtml" />
+    <Content Include="Views\Home\Scripting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

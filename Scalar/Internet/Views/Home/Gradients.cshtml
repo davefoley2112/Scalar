@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Chapter 3";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<aside>
+    <h3>SVG</h3>
+    <p>Gradients</p>
+</aside>
+
+<h3>The stop and stop-color attributes.</h3>
+<p>This example shows the definition of a linear gradient and that of a radial gradient, which are then applied to the fill attribute of a path.</p>
+<p>The gradient is applied to the fill attribute of an element. This demonstrates that an object may have a color or a gradient as its fill, but not both.</p>
+<p>Note that in the linear gradient, two stop elements have been built. This means the gradient has two colors applied to it, one for each stop. Those colors are determined by the stop-color attribute. The offset attribute is either a number (between 0 and 1) or a percentage, and it determines where the gradient stop is placed in the direction established by the gradient vector, which is defined by attributes of the gradient element (x1, x2, y1, y2 for a linear gradient, and cx, cy for a radial gradient). For the linear gradient in the example, white is applied at the leftmost part of the triangle, while black is applied to the rightmost part. Shades of gray gradually darken as we move to the right, with a grayscale value of 128/256, or 50%, occurring halfway across the image, or along the line where x equals 150.</p>
+<p>For the radial gradient, the midpoint of the bounding rectangle around the path is chosen as the center. From there, we apply our first stop color (zero percent of the way out toward the corners of the bounding box). Black will be applied to the four corners of the bounding rectangle, with shades of gray gradually lightening as we move toward the center.</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="200">
+    <path d="M 100 200 200 200 150 100 z" stroke="black" stroke-width="2" fill="url(#g1)" />
+
+    <linearGradient id="g1">
+        <stop offset="0" stop-color="white"/>
+        <stop offset="1" stop-color="black"/>
+    </linearGradient>
+
+    <path d="M 300 200 400 200 350 100 z" stroke="black" stroke-width="2" fill="url(#g2)"/>
+    <radialGradient id="g2">
+        <stop offset="0" stop-color="white"/>
+        <stop offset="1" stop-color="black"/>
+    </radialGradient>
+</svg>
+
+<h3>The stop-opactity attribute</h3>
+<p>In addition to specifying the color of a stop within a gradient, you can also specify its opacity through an attribute known as stop-opacity. You can thus make gradients act like differential masks, allowing, for example, an image underneath to gradually fade into view.</p>
+<p>This example shows two different gradients defined and used in separate images. It creates a tricolor gradient by superimposing one on the other. Notice the use of the transform attribute to control the direction in which the gradient is applied.</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="150">
+    <linearGradient id="r" >
+        <stop offset="0" stop-color="red"/>
+        <stop offset="1" stop-color="green"/>
+    </linearGradient>
+
+    <linearGradient id="t" gradientTransform="rotate(90,.5,.5)">
+        <stop offset="0" stop-color="white" stop-opacity="0"/>
+        <stop offset="1" stop-color="#208" />
+    </linearGradient>
+
+    <rect x="10" y="10" width="100" height="100" fill="url(#r)" />
+    <rect x="120" y="10" width="100" height="100" fill="url(#t)" />
+    <rect x="230" y="10" height="100" width="100" fill="url(#r)"/>
+    <rect x="340" y="10" height="100" width="100" fill="url(#t)"/>
+</svg>
+
+<p>This is similar to the previous example, but uses more than two colors in the gradient, as well as the stop-opacity attribute:</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="250">
+    <linearGradient id="r" >
+        <stop offset="0" stop-color="red"/>
+        <stop offset=".5" stop-color="yellow"/>
+        <stop offset="1" stop-color="green"/>
+    </linearGradient>
+
+    <linearGradient id="t" gradientTransform="rotate(90,.5,.5)">
+        <stop offset="0" stop-color="#008" />
+        <stop offset=".4" stop-color="cyan" stop-opacity="0"/>
+        <stop offset=".6" stop-color="cyan" stop-opacity="0"/>
+        <stop offset="1" stop-color="#22a" />
+    </linearGradient>
+
+    <linearGradient id="s" gradientTransform="rotate(45,.5,.5)">
+        <stop offset="0" stop-color="#008" />
+        <stop offset=".45" stop-color="red" stop-opacity="0"/>
+        <stop offset=".55" stop-color="green" stop-opacity="0"/>
+        <stop offset="1" stop-color="#22a" />
+    </linearGradient>
+
+    <rect x="10" y="10" height="100" width="100" fill="url(#r)"/>
+    <rect x="120" y="10" height="100" width="100" fill="url(#t)"/>
+    <rect x="230" y="10" height="100" width="100" fill="url(#s)"/>
+    <rect x="120" y="120" height="100" width="100" fill="url(#r)"/>
+</svg>
+
+<p>In this example, one simple gradient is used to impart a slightly asymmetric sheen that fades into darkness at the sides, to simulate the appearance of a rotating cylinder:</p>
+<svg xmlns="http://www.w3.org/2000/svg" height="275">
+
+    <linearGradient id="cylinder" x1="0" y1="1" x2=".2" y2="0">
+        <stop offset=".1" stop-color="red"/>
+        <stop offset=".1" stop-color="white"/>
+        <stop offset=".2" stop-color="white"/>
+        <stop offset=".2" stop-color="blue"/>
+        <stop offset=".3" stop-color="blue"/>
+        <stop offset=".3" stop-color="white"/>
+        <stop offset=".4" stop-color="white"/>
+        <stop offset=".4" stop-color="red"/>
+        <stop offset=".5" stop-color="red"/>
+        <stop offset=".5" stop-color="white"/>
+        <stop offset=".6" stop-color="white"/>
+        <stop offset=".6" stop-color="blue"/>
+        <stop offset=".7" stop-color="blue"/>
+        <stop offset=".7" stop-color="white"/>
+        <stop offset=".8" stop-color="white"/>
+        <stop offset=".8" stop-color="red"/>
+        <stop offset=".9" stop-color="red"/>
+        <stop offset=".9" stop-color="white"/>
+        <stop offset="1" stop-color="white"/>
+        <stop offset="1" stop-color="blue"/>
+    </linearGradient>
+
+    <linearGradient id="gradient1">
+        <stop offset="0" stop-color="black"/>
+        <stop offset="0.3" stop-color="white" stop-opacity="0"/>
+        <stop offset="0.4" stop-color="white" stop-opacity=".8"/>
+        <stop offset="0.6" stop-color="white" stop-opacity=".0"/>
+        <stop offset="1" stop-color="black"/>
+    </linearGradient>
+
+    <rect x="10" y="10" height="250" width="55" fill="url(#cylinder)"/>
+    <rect x="10" y="10" height="250" width="55" fill="url(#gradient1)"/>
+</svg>
